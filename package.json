@@ -1,0 +1,19 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "To create a user data with real-time filter as a todo list",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shanmuga-Priya-98/todo-list.git"
+  },
+  "author": "Shanmuga Priya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shanmuga-Priya-98/todo-list/issues"
+  },
+  "homepage": "https://github.com/Shanmuga-Priya-98/todo-list#readme"
+}
