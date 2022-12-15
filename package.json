@@ -4,6 +4,7 @@
   "description": "To create a user data with real-time filter as a todo list",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/Shanmuga-Priya-98/todo-list/issues"
   },
-  "homepage": "https://github.com/Shanmuga-Priya-98/todo-list#readme"
+  "homepage": "https://github.com/Shanmuga-Priya-98/todo-list#readme",
+  "devDependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.7.3",
+    "nodemon": "^2.0.20",
+    "winston": "^3.8.2"
+  },
+  "dependencies": {}
 }
