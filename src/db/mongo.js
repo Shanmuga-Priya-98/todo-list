@@ -2,12 +2,12 @@ const constants = require('../utils/constants');
 const mongo=require('mongodb').MongoClient;
 const dbUrl = 'mongodb://localhost:27017';
 
-let dbConnection, collection;
+let dbConnection, connection;
 
 const connectToDB = async ()=>{
     dbConnection= await mongo.connect(dbUrl, { useUnifiedTopology: true });
-    collection=dbConnection.db(constants.DBNAME).collection(constants.USER_DETAILS);
-    return collection;
+    connection=dbConnection.db(constants.DBNAME);
+    return connection;
 }
 
 module.exports.save= async (userDetails) =>{
@@ -15,7 +15,7 @@ module.exports.save= async (userDetails) =>{
         const db =  await connectToDB();
         const created_at = new Date();
         const updated_at = new Date();
-        const response = await  db.insertOne({...userDetails, created_at, updated_at},(err,record)=>{
+        const response = await db.collection(constants.USER_DETAILS).insertOne({...userDetails, created_at, updated_at},(err,record)=>{
             if(err){
                 console.log(err)
             }
@@ -33,7 +33,7 @@ module.exports.save= async (userDetails) =>{
 module.exports.fetchRecords = async () =>{
     try {
         const db =  await connectToDB();
-        const response = await  db.find({}).toArray();
+        const response = await  db.collection(constants.USER_DETAILS).find({}).toArray();
         return response;
     }catch (err){
         console.log(err)
@@ -44,7 +44,7 @@ module.exports.fetchRecords = async () =>{
 module.exports.findByEmail = async (email) =>{
     try {
         const db =  await connectToDB();
-        const response = await  db.findOne({email});
+        const response = await  db.collection(constants.USER_DETAILS).findOne({email});
         if(!response){
             return null;
         }else{
@@ -56,13 +56,39 @@ module.exports.findByEmail = async (email) =>{
     }
 }
 
-module.exports.searchGender = async (params)=>{
+
+module.exports.saveTaskList = async (payload) =>{
     try {
         const db =  await connectToDB();
-        const response = await  db.find({gender:params}).toArray();
-        return response;
+        const created_at = new Date();
+        const updated_at = new Date();
+        const response = await db.collection(constants.TODO_LIST_DETAILS).insertOne({...payload, created_at, updated_at},(err,record)=>{
+            if(err){
+                console.log(err)
+            }
+
+            return record.insertedId;
+        })
+
+        return response
+
     }catch (err){
         console.log(err)
     }
 }
 
+module.exports.viewList = async (email)=>{
+    try {
+        const db =  await connectToDB();
+        const response = await  db.collection(constants.TODO_LIST_DETAILS).find({email}).toArray();
+        console.log('----------', response)
+        if(!response){
+            return null;
+        }else{
+            return response;
+        }
+
+    }catch (err){
+        console.log(err)
+    }
+}

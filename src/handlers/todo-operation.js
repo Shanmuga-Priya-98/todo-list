@@ -21,16 +21,15 @@ module.exports.authenticateUser = async (request, response, next) => {
     }
 };
 
-module.exports.searchByGender = async (authorization,request,response) =>{
-
-    const gender=request.query.gender;
-    const result = await mongo.searchGender(gender);
-    if(result){
-        return response.status(200).send(errorResponse.successResponse({message:result}));
-
-    }else{
-        return response.status(404).send(errorResponse.notFoundResponse({message:'no data found'}));
-
-    }
+module.exports.saveTask = async (request, response) =>{
+    const email= request.body.email;
+    const task = request.body.task;
+    await mongo.saveTaskList({email,task});
+    return response.status(200).send(errorResponse.successResponse({message:'task saved successfully'}))
 }
 
+module.exports.listTask = async (request, response) =>{
+    const email= "diya@yahoo.com";
+    const result = await mongo.viewList(email);
+    return response.status(200).send(errorResponse.successResponse({message:result.map((rec)=>{return rec.task})}))
+}
