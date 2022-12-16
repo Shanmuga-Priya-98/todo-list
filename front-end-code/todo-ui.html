@@ -1,16 +1,20 @@
 <html>
 <head>
-<style></style>
+<style type="text/css">
+</style>
 </head>
 <body>
+
 <form action="/task/save" method="POST">
     <label>Email : </label><input type="text" id="email" name="email">
     <label>Add Task : </label><input type="text" id="task" name="task">
     <input type="submit" value="add new task">
 </form>
+
 <form action="/task/list" method="GET">
     <label>View Todo List</label>
     <input type="submit" value="view task">
 </form>
+
 </body>
 </html>

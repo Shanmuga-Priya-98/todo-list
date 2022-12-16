@@ -9,16 +9,19 @@ const router=express();
 
 router.use(express.json());
 router.use(bodyParser.urlencoded({ extended: true }));
-router.post('/user/register', registration.saveUserData)
-router.post('/user/login', login.fetchByEmail)
-router.post('/task/save', todo.saveTask)
-router.get('/task/list', todo.listTask)
+
+router.post('/user/register', registration.saveUserData);
+router.post('/user/login', login.fetchByEmail);
+router.post('/task/save', todo.saveTask);
+router.get('/task/list/:email', todo.listTask);
+
 
 router.use(express.static(path.join(__dirname,'./front-end-code')));
 
 router.get('/', function(req,res){
-    res.sendFile(path.join(__dirname,'./front-end-code/todo-ui.html'));
+    res.sendFile(path.join(__dirname,'./front-end-code/signup.html'));
 });
+
 router.listen(9000,()=> {
     logger.info('connected to server with port number 9000')
 })
