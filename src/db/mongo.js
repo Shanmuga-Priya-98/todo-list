@@ -92,3 +92,20 @@ module.exports.viewList = async (email)=>{
         console.log(err)
     }
 }
+
+module.exports.checkStatus = async (status)=>{
+    try {
+        const db =  await connectToDB();
+        console.log('...........', status)
+        const response = await  db.collection(constants.TODO_LIST_DETAILS).find({status}).toArray();
+
+        if(!response){
+            return null;
+        }else{
+            return response;
+        }
+
+    }catch (err){
+        console.log(err)
+    }
+}

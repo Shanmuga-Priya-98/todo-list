@@ -23,7 +23,7 @@ module.exports.authenticateUser = async (request, response, next) => {
 module.exports.saveTask = async (request, response) =>{
     const email= request.body.email;
     const task = request.body.task;
-    await mongo.saveTaskList({email,task});
+    await mongo.saveTaskList({email,task,status:'pending'});
     return response.status(200).send(errorResponse.successResponse({message:'task saved successfully'}))
 }
 
@@ -33,3 +33,14 @@ module.exports.listTask = async (request, response) =>{
     const result = await mongo.viewList(email);
     return response.status(200).send(errorResponse.successResponse({message:result.map((rec)=>{return rec.task})}))
 }
+
+module.exports.getListByStatus = async (request, response) =>{
+
+    console.log(request.body.status)
+    const result = await mongo.checkStatus(request.body.status);
+    return response.status(200).send(errorResponse.successResponse({message:result.map((rec)=>{return rec.task})}))
+}
+
+
+
+

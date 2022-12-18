@@ -14,7 +14,7 @@ router.post('/user/register', registration.saveUserData);
 router.post('/user/login', login.fetchByEmail);
 router.post('/task/save', todo.saveTask);
 router.get('/task/list/:email', todo.listTask);
-
+router.post('/task/status', todo.getListByStatus);
 
 router.use(express.static(path.join(__dirname,'./front-end-code')));
 

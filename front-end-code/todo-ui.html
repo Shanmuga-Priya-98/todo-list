@@ -14,7 +14,14 @@
 <form action="/task/list" method="GET">
     <label>View Todo List</label>
     <input type="submit" value="view task">
+
 </form>
 
+<form action="/task/status" method="POST">
+    <label>find list</label>
+    <input type="radio" name="status" id="status1" value="pending">pending
+    <input type="radio" name="status" id="status2" value="completed">completed
+    <input type="submit" value="check status">
+</form>
 </body>
 </html>
